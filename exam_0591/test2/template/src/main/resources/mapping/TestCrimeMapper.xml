@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.template.mapper.TestCrimeMapper">
+
+    <select id="listRank" resultType="com.template.vo.CrimeRankVo">
+        SELECT city, LEFT(start_date_time, 4) as year, COUNT(*) c, SUM(victims) victims_sum, sum(1) as crime_sum
+        from test1_crime GROUP BY year, city order by year, c desc
+    </select>
+    <select id="listCrimeName3" resultType="java.lang.String">
+        select crime_name3 from test1_crime WHERE city = #{city}
+        and start_date_time like concat(#{year}, '%') GROUP BY crime_name3 ORDER BY sum(1) desc limit 3
+    </select>
+
+</mapper>

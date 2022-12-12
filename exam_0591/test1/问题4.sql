@@ -1,0 +1,1 @@
+update test1_crime set city = UPPER(city) WHERE city is not null;
